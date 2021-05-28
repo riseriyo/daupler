@@ -12,17 +12,12 @@ class Team(models.Model):
         return HttpResponse("Get my members!")
 
 
+
 class Member(models.Model):
-    fname = models.CharField(max_length=200)
+    first_name = models.CharField(max_length=200)
+    role = models.CharField(max_length=200)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    role = models.ForeignKey(Role, on_delete=models.CASCADE)
+
 
     def __str__(self):
-        return self.fname
-
-
-class Roles(models.Model):
-    title = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.title
+        return '{} {} {}'.format(self.first_name, self.role, self.team.id)
