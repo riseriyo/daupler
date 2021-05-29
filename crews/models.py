@@ -7,9 +7,6 @@ class Team(models.Model):
 
     def __str__(self):
         return ' {} '.format(self.name)
-    
-    def get_queryset(self):
-        return 
 
 
 class Member(models.Model):

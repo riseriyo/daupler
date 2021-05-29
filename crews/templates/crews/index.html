@@ -4,11 +4,11 @@
      {% for team in list_of_teams %}
          <li><a href="{% url 'crews:team_detail' pk=team.pk %}">{{ team.name }}</a><br />
             <ol>
-                {% if team.member_set.all %}
-                    {% for m_obj in team.member_set.all %}
+                {% if team.members.all %}
+                    {% for member in team.members.all %}
 
                     <li>
-                        {{ m_obj.first_name }}, {{ m_obj.role }}
+                        {{ member.first_name }}, {{ member.role }}
                     </li>
                     {% endfor %}
                 {% else %}
