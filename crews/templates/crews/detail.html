@@ -1,0 +1,14 @@
+<h1>Team {{ team.name }}</h1>
+<div>{{ team.id }}</div>
+<div> {{ member.first_name }}</div>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="#" method="post">
+{% csrf_token %}
+{% for member in members.objects.all %}
+    <input type="radio" name="member" id="member{{ forloop.counter }}" value="{{ member.id }}">
+    <label for="member{{ forloop.counter }}">{{ member.first_name }}</label><br />
+{% endfor %}
+<input type="submit" value="Add member">
+</form>

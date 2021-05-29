@@ -1,9 +1,25 @@
-{% if latest_team_list %}
+{% if list_of_teams %}
+<h2>Teams</h2>
     <ul>
-     {% for team in latest_team_list %}
-         <li><a href="{% url 'crews:index' team.id %}">{{ team.name }}</a></li>
+     {% for team in list_of_teams %}
+         <li><a href="{% url 'crews:team_detail' pk=team.pk %}">{{ team.name }}</a><br />
+            <ol>
+                {% if team.member_set.all %}
+                    {% for m_obj in team.member_set.all %}
+
+                    <li>
+                        {{ m_obj.first_name }}, {{ m_obj.role }}
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <p>No members are available.</p>
+                {% endif %}
+            </ol>
+        </li>
+
      {% endfor %}
     </ul>
 {% else %}
     <p>No teams are available.</p>
 {% endif %}
+<a href="{% url 'crews:team_new' %}">Add New Team</a>

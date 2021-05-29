@@ -6,17 +6,16 @@ class Team(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name
-
-    def get_members(self):
-        return HttpResponse("Get my members!")
-
+        return ' {} '.format(self.name)
+    
+    def get_queryset(self):
+        return 
 
 
 class Member(models.Model):
     first_name = models.CharField(max_length=200)
     role = models.CharField(max_length=200)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, related_name="members", on_delete=models.CASCADE)
 
 
     def __str__(self):
