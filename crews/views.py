@@ -17,7 +17,7 @@ def team_list(request):
 def team_detail(request, pk):
     team= Team.objects.get(pk=pk)
     teams = Team.objects.all().prefetch_related('members')
-    members = Team.objects.all().select_related('members')
+    #members = Team.objects.all().select_related('members')
     return render(request, 'crews/detail.html', {'team': team, 'teams': teams,'pk': pk})
 
 def team_new(request):
@@ -34,8 +34,14 @@ def member_new(request):
     if request.method == "POST":
         form = MemberForm(request.POST)
         if form.is_valid():
-            team = form.save(commit=True)
+            new_member = form.save(commit=True)
             return redirect('success/')
     else:
         form = MemberForm()
-    return render(request, 'crews/member_edit.html', {'form': form})
+    return render(request, 'crews/member_form.html', {'form': form})
+
+def member_delete(request):
+    member_id = request.POST['team']
+    instance = Member.objects.get(id=member_id)
+    instance.delete()
+    return redirect('success/')

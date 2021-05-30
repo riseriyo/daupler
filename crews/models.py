@@ -12,7 +12,7 @@ class Team(models.Model):
 class Member(models.Model):
     first_name = models.CharField(max_length=200)
     role = models.CharField(max_length=200)
-    team = models.ForeignKey(Team, related_name="members", on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, related_name="members", on_delete=models.CASCADE, null=False, blank=False)
 
 
     def __str__(self):

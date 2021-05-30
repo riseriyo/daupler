@@ -1,18 +1,23 @@
+
+
 <h1>Team {{ team.name }}</h1>
-<div>{{ team.id }}</div>
+
 <div> </div>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+{% if team.members.all %}
+    <form action="{% url 'crews:member_delete' %}" method="post">
+    {% csrf_token %}
 
-<form action="#" method="post">
-{% csrf_token %}
+        {% for member in team.members.all %}
+            <input type="radio" name="team" id="team{{ forloop.counter }}" value="{{ member.id }}">
+            <label for="team{{ forloop.counter }}">{{ member.first_name }}, {{ member.role }}</label><br />
+        {% endfor %}
 
-    {% for member in team.members.all %}
-        <input type="radio" name="team" id="team{{ forloop.counter }}" value="{{ team.id }}">
-        <label for="team{{ forloop.counter }}">{{ member.first_name }}</label><br />
-    {% endfor %}
-
+    <br />
+    <input type="submit" value="Delete member">
+    </form>
+{% endif %}
 <br />
-<input type="submit" value="Add member">
-</form>
+<a href="{% url 'crews:member_new' %}">Add member</a>
