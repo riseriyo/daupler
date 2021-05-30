@@ -1,23 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rise Riyo</title>
+    </head>
+<body>
+    <div><a href="{% url 'crews:index' %}">Home</a></div><br />
+    <h1>Team {{ team.name }}</h1>
 
-
-<h1>Team {{ team.name }}</h1>
-
-<div> </div>
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-{% if team.members.all %}
-    <form action="{% url 'crews:member_delete' %}" method="post">
-    {% csrf_token %}
-
-        {% for member in team.members.all %}
-            <input type="radio" name="team" id="team{{ forloop.counter }}" value="{{ member.id }}">
-            <label for="team{{ forloop.counter }}">{{ member.first_name }}, {{ member.role }}</label><br />
-        {% endfor %}
-
+    <div> </div>
+    
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    
+    {% if team.members.all %}
+        <form action="{% url 'crews:member_delete' %}" method="post">
+        {% csrf_token %}
+    
+            {% for member in team.members.all %}
+                <input type="radio" name="team" id="team{{ forloop.counter }}" value="{{ member.id }}">
+                <label for="team{{ forloop.counter }}">{{ member.first_name }}, {{ member.role }}</label><br />
+            {% endfor %}
+    
+        <br />
+        <input type="submit" value="Delete member">
+        </form>
+    {% endif %}
     <br />
-    <input type="submit" value="Delete member">
-    </form>
-{% endif %}
-<br />
-<a href="{% url 'crews:member_new' %}">Add member</a>
+    <a href="{% url 'crews:member_new' %}">Add member</a>
+</body>
+</html>

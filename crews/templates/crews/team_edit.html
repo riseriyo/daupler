@@ -1,5 +1,16 @@
-<h2>New Team</h2>
-<form method="POST" class="post-form">{% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" >Save</button>
-</form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rise Riyo</title>
+    </head>
+<body>
+    <div><a href="{% url 'crews:index' %}">Home</a></div>
+
+
+    <h2>New Team</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" >Save</button>
+    </form>
+</body>
+</html>

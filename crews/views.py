@@ -17,7 +17,6 @@ def team_list(request):
 def team_detail(request, pk):
     team= Team.objects.get(pk=pk)
     teams = Team.objects.all().prefetch_related('members')
-    #members = Team.objects.all().select_related('members')
     return render(request, 'crews/detail.html', {'team': team, 'teams': teams,'pk': pk})
 
 def team_new(request):

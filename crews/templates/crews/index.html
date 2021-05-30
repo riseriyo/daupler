@@ -1,27 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rise Riyo</title>
+    </head>
+<body>
+    {% if list_of_teams %}
+    <h2>Teams</h2>
+        <ul>
+         {% for team in list_of_teams %}
+             <li><a href="{% url 'crews:team_detail' pk=team.pk %}">Team {{ team.name }}</a><br />
+                <ol>
+                    {% if team.members.all %}
+                        {% for member in team.members.all %}
+    
+                        <li>
+                            {{ member.first_name }}, {{ member.role }}
+                        </li>
+                        {% endfor %}
+                    {% else %}
+                        <p>No assigned members.</p>
+                    {% endif %}
+                </ol>
+            </li>
+            <br />
+         {% endfor %}
+        </ul>
+    {% else %}
+        <p>No teams are available.</p>
+    {% endif %}
+    <a href="{% url 'crews:team_new' %}">Add New Team</a>
 
-
-{% if list_of_teams %}
-<h2>Teams</h2>
-    <ul>
-     {% for team in list_of_teams %}
-         <li><a href="{% url 'crews:team_detail' pk=team.pk %}">{{ team.name }}</a><br />
-            <ol>
-                {% if team.members.all %}
-                    {% for member in team.members.all %}
-
-                    <li>
-                        {{ member.first_name }}, {{ member.role }}
-                    </li>
-                    {% endfor %}
-                {% else %}
-                    <p>No members are available.</p>
-                {% endif %}
-            </ol>
-        </li>
-
-     {% endfor %}
-    </ul>
-{% else %}
-    <p>No teams are available.</p>
-{% endif %}
-<a href="{% url 'crews:team_new' %}">Add New Team</a>
+</body>
+</html>
